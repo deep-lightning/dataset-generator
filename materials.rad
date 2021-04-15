@@ -1,0 +1,32 @@
+void plastic white
+0
+0
+5 1 1 1 0 0
+
+void alias backWall white
+
+void alias floor white
+
+void alias ceiling white
+
+void alias light white
+
+void plastic leftWall
+0
+0
+5 1 0 0 0 0
+
+void plastic rightWall
+0
+0
+5 0 1 0 0 0
+
+void plastic dragon
+0
+0
+5 0 0 1 0 0
+
+void plastic cube
+0
+0
+5 0 0 1 0 0

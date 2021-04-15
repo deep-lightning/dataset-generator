@@ -1,0 +1,134 @@
+# obj2rad cornell.obj
+# Blender v2.83.12 OBJ File: "'cornell.blend'"
+# www.blender.org
+
+ceiling polygon Cornell.2
+0
+0
+9
+                 -1                 -1                  1
+             -0.125                 -1                  1
+             -0.125              0.125                  1
+
+ceiling polygon Cornell.2
+0
+0
+9
+             -0.125              0.125                  1
+                 -1              0.125                  1
+                 -1                 -1                  1
+
+ceiling polygon Cornell.3
+0
+0
+9
+             -0.125                 -1                  1
+                  1                 -1                  1
+                  1             -0.125                  1
+
+ceiling polygon Cornell.3
+0
+0
+9
+                  1             -0.125                  1
+             -0.125             -0.125                  1
+             -0.125                 -1                  1
+
+ceiling polygon Cornell.4
+0
+0
+9
+                 -1              0.125                  1
+              0.125              0.125                  1
+              0.125                  1                  1
+
+ceiling polygon Cornell.4
+0
+0
+9
+              0.125                  1                  1
+                 -1                  1                  1
+                 -1              0.125                  1
+
+ceiling polygon Cornell.5
+0
+0
+9
+              0.125             -0.125                  1
+                  1             -0.125                  1
+                  1                  1                  1
+
+ceiling polygon Cornell.5
+0
+0
+9
+                  1                  1                  1
+              0.125                  1                  1
+              0.125             -0.125                  1
+
+floor polygon Cornell.6
+0
+0
+9
+                 -1                  1                 -1
+                  1                  1                 -1
+                  1                 -1                 -1
+
+floor polygon Cornell.6
+0
+0
+9
+                  1                 -1                 -1
+                 -1                 -1                 -1
+                 -1                  1                 -1
+
+leftWall polygon Cornell.7
+0
+0
+9
+                 -1                 -1                 -1
+                 -1                 -1                  1
+                 -1                  1                  1
+
+leftWall polygon Cornell.7
+0
+0
+9
+                 -1                  1                  1
+                 -1                  1                 -1
+                 -1                 -1                 -1
+
+rightWall polygon Cornell.8
+0
+0
+9
+                  1                  1                 -1
+                  1                  1                  1
+                  1                 -1                  1
+
+rightWall polygon Cornell.8
+0
+0
+9
+                  1                 -1                  1
+                  1                 -1                 -1
+                  1                  1                 -1
+
+backWall polygon Cornell.9
+0
+0
+9
+                 -1                  1                 -1
+                 -1                  1                  1
+                  1                  1                  1
+
+backWall polygon Cornell.9
+0
+0
+9
+                  1                  1                  1
+                  1                  1                 -1
+                 -1                  1                 -1
+
+# Done processing file: cornell.obj
+# 86 lines, 86 statements, 3 unrecognized

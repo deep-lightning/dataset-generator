@@ -1,0 +1,15 @@
+void light bright
+0
+0
+3 10.668329 10.669745 10.673374
+# r_radiance g_radiance b_radiance
+
+# here is the light source:
+bright polygon fixture
+0
+0
+12
+    -0.125             -0.125               1
+    -0.125              0.125               1
+     0.125              0.125               1
+     0.125             -0.125               1
