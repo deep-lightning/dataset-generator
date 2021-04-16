@@ -16,9 +16,12 @@ function loop {
     mkdir -p $meta
 
     oconv materials.rad cornell_light.rad cornell.rad $1 > $meta/scene.oct
+    oconv materials.rad cornell.rad $1 > $meta/scene_wo_light.oct
     
     echo "Generating diffuse map"
-    render "diffuse" $meta $path
+    rpict @config/diffuse -z $meta/diffuse.zbf $meta/scene_wo_light.oct > $meta/diffuse.unf
+    pfilt -m .25 -x /8 -y /8 $meta/diffuse.unf > $meta/diffuse.hdr
+    convert $meta/diffuse.hdr $path/diffuse.png
 
     echo "Generating local illumination"
     render "local" $meta $path
