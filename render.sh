@@ -34,7 +34,7 @@ function loop {
     
     eval "pvalue -h $DIM -r -b -df $meta/global.zbf | falsecolor -m 1 -s 8 -l Meters -r v -b v -g v > $meta/z.hdr"
     Ra_bmp $meta/z.hdr > $meta/z.bmp
-    eval "convert $meta/z.bmp -crop ${X}x${Y}+100 -scale 512x512 $path/z.png"
+    eval "convert $meta/z.bmp -crop ${X}x${Y}+100 -scale 256x256 $path/z.png"
 
     echo "Generating normal buffer"
     vwrays -ff $meta/global.hdr | rtrace -w -ffa -on $meta/scene.oct > $meta/normal.pts
