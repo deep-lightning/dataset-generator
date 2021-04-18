@@ -1,8 +1,9 @@
 void light bright
 0
 0
-3 10.668329 10.669745 10.673374
+3 42.673318 42.678980 42.693495
 # r_radiance g_radiance b_radiance
+#3 10.668329 10.669745 10.673374
 
 # here is the light source:
 bright polygon fixture

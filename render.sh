@@ -30,18 +30,15 @@ function loop {
     render "global" $meta $path
 
     echo "Generating depth buffer"
-    DIM=`getinfo -d < $meta/global.unf`
-    Y_aux=${DIM#*Y }
-    Y=${Y_aux%% +X*}
-    X=${DIM##* }
-    
-    eval "pvalue -h $DIM -r -b -df $meta/global.zbf | falsecolor -m 1 -s 8 -l Meters -r v -b v -g v > $meta/z.hdr"
+    pvalue -h `getinfo -d < $meta/global.unf` -r -b -df $meta/global.zbf | falsecolor -lw 0 -m 1 -s 10 -l Meters -r v -g v -b v > $meta/z.unf
+    pfilt -m .25 -x /8 -y /8 $meta/z.unf > $meta/z.hdr
     Ra_bmp $meta/z.hdr > $meta/z.bmp
-    eval "convert $meta/z.bmp -crop ${X}x${Y}+100 -scale 256x256 $path/z.png"
+    convert $meta/z.bmp $path/z.png
 
     echo "Generating normal buffer"
-    vwrays -ff $meta/global.hdr | rtrace -w -ffa -on $meta/scene.oct > $meta/normal.pts
-    getinfo -c rcalc -oa -e '$1=($1+1)/2;$2=($2+1)/2;$3=($3+1)/2' < $meta/normal.pts | pvalue -r -da `getinfo -d < $meta/global.hdr` > $meta/normal.hdr
+    vwrays -ff $meta/global.unf | rtrace -w -ffa -on $meta/scene.oct > $meta/normal.pts
+    getinfo -c rcalc -oa -e '$1=($1+1)/2;$2=($2+1)/2;$3=($3+1)/2' < $meta/normal.pts | pvalue -r -da `getinfo -d < $meta/global.unf` > $meta/normal.unf
+    pfilt -m .25 -x /8 -y /8 $meta/normal.unf > $meta/normal.hdr
     Ra_bmp $meta/normal.hdr > $meta/normal.bmp
     convert $meta/normal.bmp $path/normal.png
 }
