@@ -38,5 +38,7 @@ void alias rightWall green
 
 # Object
 void alias dragon blue
-void alias cube espejo
-void alias sphere espejo
+void alias cube blue
+void alias sphere blue
+void alias buddha blue
+void alias bunny blue
