@@ -5,7 +5,7 @@ function filter {
 }
 
 function render {
-    rpict @config/$1 -z $2/$1.zbf $2/scene.oct > $2/$1.unf
+    rpict -ab 1 -ap $meta/global_photon_map.gpm 50 -ap $meta/caustic_photon_map.cpm 50 @config/$1 -z $2/$1.zbf $2/scene.oct > $2/$1.unf
     filter $1 $2
     convert $2/$1.hdr $3/$1.png
 }
@@ -21,9 +21,12 @@ function loop {
 
     oconv materials.rad cornell_light.rad cornell.rad $1 > $meta/scene.oct
     oconv materials.rad cornell.rad $1 > $meta/scene_wo_light.oct
-    
+
+    echo "Generating photon maps"
+    mkpmap -apg $meta/global_photon_map.gpm 10k -apc $meta/caustic_photon_map.cpm 10k -t 60 $meta/scene.oct
+
     echo "Generating diffuse map"
-    rpict @config/diffuse -z $meta/diffuse.zbf $meta/scene_wo_light.oct > $meta/diffuse.unf
+    rpict -ab 1 -ap $meta/global_photon_map.gpm 50 -ap $meta/caustic_photon_map.cpm 50 @config/diffuse -z $meta/diffuse.zbf $meta/scene_wo_light.oct > $meta/diffuse.unf
     filter "diffuse" $meta
     convert $meta/diffuse.hdr $path/diffuse.png
 

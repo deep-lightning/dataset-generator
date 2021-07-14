@@ -10,6 +10,15 @@ Radiance configuration files and bash scripts to generate the dataset used in ht
 You'll need to run the following on your terminal:
 - sh render.sh base_input output_folder
 
+## Output:
+
+For each scene-light-object configuration:
+  - diffuse illumination
+  - global illumination
+  - local illumination
+  - normal buffer
+  - z buffer
+
 ### In case you want to use the network with indirect illumination:
 After generating the dataset, run:
 - python generateIndirect.py
