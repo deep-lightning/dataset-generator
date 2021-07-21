@@ -8,7 +8,13 @@ Radiance configuration files and bash scripts to generate the dataset used in ht
 ## How to run it:
 
 You'll need to run the following on your terminal:
-- sh render.sh base_input output_folder
+- sh render.sh base_input output_folder cpm vpm
+
+The last two arguments are optional, and refer to:
+- Caustic photon map (cpm)
+- Volume photon map (vpm)
+
+Include each in case of need, in that specific order. Global photon map is included by default.
 
 ## Output:
 

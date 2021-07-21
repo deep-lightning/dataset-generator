@@ -28,6 +28,22 @@ void mirror espejo
 0
 3 1 1 1
 
+void spotlight spot
+0
+0
+7  1000 1000 1000 40  0 0 -1
+
+spot ring spot_light
+0
+0
+8  0 0 1  0 0 -1  0.08 0.0
+
+void mist fogdemo
+1 spot_light
+0
+6 0.8 0.8 0.8 0.9 0.9 0.9
+# 0|3|6|7 [ rext gext bext [ ralb galb balb [ g ] ] ]
+
 # Cornell Box
 void alias backWall white
 void alias floor white
@@ -40,5 +56,6 @@ void alias rightWall green
 void alias dragon blue
 void alias cube blue
 void alias sphere blue
+void alias cone fogdemo
 void alias buddha blue
 void alias bunny blue

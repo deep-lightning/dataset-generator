@@ -1,0 +1,12 @@
+dragon mesh dragon
+1 ./base_input/dragon.rtm
+0
+0
+
+cone cone cone
+0
+0
+8
+0 0 -1
+0 0 1
+1 0.2
