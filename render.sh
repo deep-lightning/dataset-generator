@@ -1,8 +1,5 @@
 # $1 mode
 # $2 path
-# $3 if needs caustic photon map
-# $4 if needs volume photon map
-
 function filter {
     pfilt -m .25 -x /2 -y /2 $2/$1.unf > $2/$1.hdr
 }
@@ -13,6 +10,10 @@ function render {
     convert $2/$1.hdr $3/$1.png
 }
 
+# $1 file
+# $2 output directory
+# $3 if needs caustic photon map
+# $4 if needs volume photon map
 function loop {
     filename=${1##*/}       # remove until /
     name=${filename%.rad}   # remove trailing .rad
@@ -27,12 +28,12 @@ function loop {
 
     make_gpm="-apg $meta/global_photon_map.gpm 5k"
     use_gpm="-ap $meta/global_photon_map.gpm 50"
-    if [ "$2" = "cpm" ]; then
+    if [ "$3" = "cpm" ]; then
       echo "Using caustic photon map"
       make_cpm="-apc $meta/caustic_photon_map.vpm 5k"
       use_cpm="-ap $meta/caustic_photon_map.vpm 50"
     fi
-    if [ "$3" = "vpm" ]; then
+    if [ "$4" = "vpm" ]; then
       echo "Using volume photon map"
       make_vpm="-apv $meta/volume_photon_map.vpm 5k -ma 1 1 1 -mg 1"
       use_vpm="-ap $meta/volume_photon_map.vpm 50"
