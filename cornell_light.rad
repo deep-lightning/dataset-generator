@@ -5,12 +5,51 @@ void light bright
 # r_radiance g_radiance b_radiance
 #3 10.668329 10.669745 10.673374
 
+bright source id
+0
+0
+4 1 -1 0 .5
+
 # here is the light source:
-bright polygon fixture
-0
-0
-12
-    -0.125             -0.125               1
-    -0.125              0.125               1
-     0.125              0.125               1
-     0.125             -0.125               1
+#bright polygon fixture
+#0
+#0
+#12
+#    -0.125             -0.125               1
+#    -0.125              0.125               1
+#     0.125              0.125               1
+#     0.125             -0.125               1
+
+#void spotlight bright
+#0
+#0
+#7 42.673318 42.678980 42.693495 5 0 1 0
+# r_radiance g_radiance b_radiance
+#3 10.668329 10.669745 10.673374
+
+#bright sphere fixture
+#0
+#0
+#4 0 -10 0 0.1
+
+
+#bright polygon fixture
+#0
+#0
+#12
+#    -0.125             -10         -0.125
+#    -0.125             -10          0.125
+#     0.125             -10          0.125
+#     0.125             -10         -0.125
+
+#void mist fogdemo
+#1 fixture
+#0
+#6 0.5 0.5 0.5 0.9 0.9 0.9
+# 6 0.8 0.8 0.8 0.9 0.9 0.9
+# 0|3|6|7 [ rext gext bext [ ralb galb balb [ g ] ] ]
+
+#fogdemo sphere domo_mist
+#0
+#0
+#4 0 0 0 2

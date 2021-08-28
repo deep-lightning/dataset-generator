@@ -1,0 +1,86 @@
+# obj2rad raw_cornell.obj
+# Blender v2.83.12 OBJ File: "'raw_cornell.blend'"
+# www.blender.org
+
+leftWall polygon Cornell.1
+0
+0
+9
+                 -1                 -1                 -1
+                 -1                 -1                  1
+                 -1                  1                  1
+
+leftWall polygon Cornell.1
+0
+0
+9
+                 -1                  1                  1
+                 -1                  1                 -1
+                 -1                 -1                 -1
+
+rightWall polygon Cornell.2
+0
+0
+9
+                  1                  1                 -1
+                  1                  1                  1
+                  1                 -1                  1
+
+rightWall polygon Cornell.2
+0
+0
+9
+                  1                 -1                  1
+                  1                 -1                 -1
+                  1                  1                 -1
+
+ceiling polygon Cornell.3
+0
+0
+9
+                  1                  1                  1
+                 -1                  1                  1
+                 -1                 -1                  1
+
+ceiling polygon Cornell.3
+0
+0
+9
+                 -1                 -1                  1
+                  1                 -1                  1
+                  1                  1                  1
+
+floor polygon Cornell.4
+0
+0
+9
+                 -1                  1                 -1
+                  1                  1                 -1
+                  1                 -1                 -1
+
+floor polygon Cornell.4
+0
+0
+9
+                  1                 -1                 -1
+                 -1                 -1                 -1
+                 -1                  1                 -1
+
+backWall polygon Cornell.5
+0
+0
+9
+                 -1                  1                 -1
+                 -1                  1                  1
+                  1                  1                  1
+
+backWall polygon Cornell.5
+0
+0
+9
+                  1                  1                  1
+                  1                  1                 -1
+                 -1                  1                 -1
+
+# Done processing file: raw_cornell.obj
+# 40 lines, 40 statements, 2 unrecognized
