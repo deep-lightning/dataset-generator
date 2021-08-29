@@ -1,3 +1,7 @@
+PATH=$PATH:./radiance/bin
+cat /etc/issue
+rpict -version
+
 # $1 mode
 # $2 path
 function filter {
@@ -5,9 +9,16 @@ function filter {
 }
 
 function render {
-    rpict -ab 1 ${use_gpm} ${use_cpm} ${use_vpm} @config/$1 -z $2/$1.zbf $2/scene.oct > $2/$1.unf
-    filter $1 $2
-    convert $2/$1.hdr $3/$1.png
+
+    if [ $1 == "diffuse" ]; then
+      scene=$meta/scene_wo_light.oct
+    else
+      scene=$meta/scene.oct
+    fi
+
+    rpict ${use_gpm} ${use_cpm} ${use_vpm} @config/$1 -z $meta/$1.zbf $scene > $meta/$1.unf
+    filter $1 $meta
+    convert $meta/$1.hdr $path/$1.png
 }
 
 # $1 file
@@ -43,15 +54,13 @@ function loop {
     mkpmap ${make_gpm} ${make_cpm} ${make_vpm} -t 60 $meta/scene.oct
 
     echo "Generating diffuse map"
-    rpict -ab 1 ${use_gpm} ${use_cpm} ${use_vpm} @config/diffuse -z $meta/diffuse.zbf $meta/scene_wo_light.oct > $meta/diffuse.unf
-    filter "diffuse" $meta
-    convert $meta/diffuse.hdr $path/diffuse.png
+    render "diffuse"
 
     echo "Generating local illumination"
-    render "local" $meta $path
+    render "local"
 
     echo "Generating global illumination"
-    render "global" $meta $path
+    render "global"
 
     echo "Generating depth buffer"
     pvalue -h `getinfo -d < $meta/global.unf` -r -b -df $meta/global.zbf | falsecolor -lw 0 -m 1 -s 10 -l Meters -r v -g v -b v > $meta/z.unf
@@ -72,9 +81,16 @@ function loop {
 
 # $1 input folder
 # $2 output folder
+n=0
+N=15
 for file in $1/*.rad
 do
+  if [ "$n" -eq "$N" ]; then
+    wait
+    n=0
+  fi
     echo $file
     loop $file $2 $3 $4 &
+    n=$(( n + 1 ))
 done
 wait
