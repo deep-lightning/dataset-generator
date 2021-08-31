@@ -5,7 +5,8 @@ rpict -version
 # $1 mode
 # $2 path
 function filter {
-    pfilt -m .25 -x /2 -y /2 $2/$1.unf > $2/$1.hdr
+    pfilt -m .25 -x /2 -y /2 $meta/$1.unf > $meta/$1.hdr
+    ra_tiff $meta/$1.hdr $path/$1.tiff
 }
 
 function render {
@@ -17,8 +18,7 @@ function render {
     fi
 
     rpict ${use_gpm} ${use_cpm} ${use_vpm} @config/$1 -z $meta/$1.zbf $scene > $meta/$1.unf
-    filter $1 $meta
-    convert $meta/$1.hdr $path/$1.png
+    filter $1
 }
 
 # $1 file
@@ -64,16 +64,12 @@ function loop {
 
     echo "Generating depth buffer"
     pvalue -h `getinfo -d < $meta/global.unf` -r -b -df $meta/global.zbf | falsecolor -lw 0 -m 1 -s 10 -l Meters -r v -g v -b v > $meta/z.unf
-    filter "z" $meta
-    Ra_bmp $meta/z.hdr > $meta/z.bmp
-    convert $meta/z.bmp $path/z.png
+    filter "z"
 
     echo "Generating normal buffer"
     vwrays -ff $meta/global.unf | rtrace -w -ffa -on $meta/scene.oct > $meta/normal.pts
     getinfo -c rcalc -oa -e '$1=($1+1)/2;$2=($2+1)/2;$3=($3+1)/2' < $meta/normal.pts | pvalue -r -da `getinfo -d < $meta/global.unf` > $meta/normal.unf
-    filter "normal" $meta
-    Ra_bmp $meta/normal.hdr > $meta/normal.bmp
-    convert $meta/normal.bmp $path/normal.png
+    filter "normal"
 
     # cleanup
     rm -r $meta
