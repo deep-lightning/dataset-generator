@@ -5,8 +5,7 @@ rpict -version
 # $1 mode
 # $2 path
 function filter {
-    pfilt -m .25 -x /2 -y /2 $meta/$1.unf > $meta/$1.hdr
-    ra_tiff $meta/$1.hdr $path/$1.tiff
+    pfilt -1 -x /16 -y /16 $meta/$1.unf > $path/$1.hdr
 }
 
 function render {
@@ -34,8 +33,8 @@ function loop {
     meta="meta/$name"
     mkdir -p $meta
 
-    oconv materials.rad cornell_light.rad cornell.rad $1 > $meta/scene.oct
-    oconv materials.rad cornell.rad $1 > $meta/scene_wo_light.oct
+    oconv materials.rad cornell_light.rad raw_cornell.rad $1 > $meta/scene.oct
+    oconv materials.rad raw_cornell.rad $1 > $meta/scene_wo_light.oct
 
     make_gpm="-apg $meta/global_photon_map.gpm 5k"
     use_gpm="-ap $meta/global_photon_map.gpm 50"
@@ -70,6 +69,10 @@ function loop {
     vwrays -ff $meta/global.unf | rtrace -w -ffa -on $meta/scene.oct > $meta/normal.pts
     getinfo -c rcalc -oa -e '$1=($1+1)/2;$2=($2+1)/2;$3=($3+1)/2' < $meta/normal.pts | pvalue -r -da `getinfo -d < $meta/global.unf` > $meta/normal.unf
     filter "normal"
+
+    echo "Generating indirect buffer"
+    pcomb $meta/global.unf -s -1 $meta/local.unf > $meta/indirect.unf
+    filter "indirect"
 
     # cleanup
     rm -r $meta
