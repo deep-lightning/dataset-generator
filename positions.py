@@ -9,15 +9,15 @@ random.seed(a=27)
 amount = int(amount)
 values = set()
 for x in range(amount):
-    tx = random.uniform(-0.5, 0.5)
-    ty = random.uniform(-0.5, 0.5)
+    tx = random.uniform(-0.25, 0.25)
+    ty = random.uniform(-0.25, 0.25)
 
-    rx = random.choice(range(0, 360, 1))
-    # ry = random.choice(range(0, 360, 1))
-    rz = random.choice(range(0, 360, 1))
+    rx = random.choice(list(range(0, 46, 1)) + list(range(315, 360, 1)))  # pitch
+    ry = random.choice(range(0, 360, 1))  # roll
+    rz = random.choice(range(0, 360, 1))  # yaw
 
     subprocess.run(
-        f"xform -t {tx} 0 {ty} -rx {rx} -ry 0 -rz {rz} ./base_input/{model}.rad > ./input/{model}_{x}.rad",
+        f"xform -t {tx} 0 {ty} -rx {rx} -ry {ry} -rz {rz} ./base_input/{model}.rad > ./input/{model}_{x}.rad",
         shell=True,
     )
     values.add((tx, ty, rx, rz))
