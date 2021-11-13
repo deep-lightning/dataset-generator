@@ -23,6 +23,18 @@ void plastic gray
 0
 5 0.8 0.8 0.8 0 0
 
+# hex FFF000
+void plastic yellow
+0
+0
+5 1 0.941 0 0 0
+
+# hex #AA00FF 
+void plastic violet
+0
+0
+5 0.666 0 1 0 0
+
 void glass vidrio
 0
 0
