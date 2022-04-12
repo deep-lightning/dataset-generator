@@ -2,7 +2,7 @@
 # sh motion_blur.sh input_folder
 #
 # This script will give you an effect of motion blur to the images inside the input_folder
-#
+# Needs imagemagick to be installed
 
 mkdir "output-motion-blur"
 for file in $1/*.png
