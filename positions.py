@@ -1,15 +1,29 @@
 import math
-import sys
 import random
 import subprocess
+import sys
+from pathlib import Path
 
-_, amount, model = sys.argv
+_, number, model = sys.argv
 
 random.seed(a=27)
+output_folder = Path("input")
+camera_folder = Path("per_config")
+object_folder = Path("base_input")
 
-amount = int(amount)
+try:
+    output_folder.mkdir()
+except FileExistsError:
+    print("input folder already exists")
+
+try:
+    camera_folder.mkdir()
+except FileExistsError:
+    print("per_config folder already exists")
+
+number = int(number)
 values = set()
-for x in range(amount):
+for x in range(number):
     tx = random.uniform(-0.25, 0.25)
     ty = random.uniform(-0.25, 0.25)
 
@@ -17,8 +31,11 @@ for x in range(amount):
     ry = random.choice(range(0, 360, 1))  # roll
     rz = random.choice(range(0, 360, 1))  # yaw
 
+    object_path = object_folder / f"{model}.rad"
+    output_path = output_folder / f"{model}_{x}.rad"
+
     subprocess.run(
-        f"xform -t {tx} 0 {ty} -rx {rx} -ry {ry} -rz {rz} ./base_input/{model}.rad > ./input/{model}_{x}.rad",
+        f"xform -t {tx} 0 {ty} -rx {rx} -ry {ry} -rz {rz} {str(object_path.resolve())} > {str(output_path.resolve())}",
         shell=True,
     )
     values.add((tx, ty, rx, rz))
@@ -40,7 +57,8 @@ for x in range(amount):
     up_y = 0
     up_z = 1
 
-    with open(f"./per_config/{x}", "w") as f:
+    camera_path = camera_folder / f"{x}.rad"
+    with camera_path.open("w") as f:
         f.writelines(
             [
                 f"-vp {pos_x} {pos_y} {pos_z}\n",
@@ -49,9 +67,4 @@ for x in range(amount):
             ]
         )
 
-if len(values) == amount:
-    print("All values different")
-else:
-    print("At least a value is repeated")
-
-# print(values, len(values), amount, len(values) == amount)
+print(f"Created {len(values)} configs")
